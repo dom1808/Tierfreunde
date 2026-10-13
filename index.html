@@ -244,17 +244,21 @@ body.m-tf .danger{background:rgba(255,255,255,.7);color:#c0394f;border-color:#f0
 .card.tfc{padding:.42em;background:linear-gradient(160deg,#ffe2b8,#ffb6c9);color:#3b2f4a}
 .card.tfc.tf-h{background:linear-gradient(160deg,#c9ecff,#c6f0d4)}
 .tfc .tin{flex:1;display:flex;flex-direction:column;min-height:0;background:#fffdf8;border-radius:.6em;padding:.35em .42em .3em;position:relative;z-index:1}
-.tfc .thd{display:flex;align-items:center;gap:.3em;line-height:1.15}
-.tfc .tnm{flex:1;font-weight:900;font-size:1.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tfc .thd{display:flex;align-items:center;gap:.3em;line-height:1.15;min-height:1.15em;flex-shrink:0}
+.tfc .tnm{flex:1;min-width:0;font-weight:900;font-size:var(--name-size,1em);white-space:nowrap}
 .tfc .tbadge{font-size:.55em;font-weight:900;border-radius:1em;padding:.15em .55em;color:#fff;background:#e8789a;white-space:nowrap}
 .tfc.tf-h .tbadge{background:#4aa3d8}
-.tfc .tart{margin:.28em 0;border-radius:.55em;overflow:hidden;aspect-ratio:16/10;flex-shrink:0;border:.16em solid #f2a5b8;background:#f4ece0}
+.tfc .tart{margin:.28em 0 .4em;border-radius:.55em;overflow:hidden;aspect-ratio:16/10;flex:1 1 auto;min-height:5em;border:.16em solid #f2a5b8;background:#f4ece0}
 .tfc.tf-h .tart{border-color:#9fd2ef}
 .tfc .tart img,.tfc .tart svg{width:100%;height:100%;object-fit:cover;display:block}
-.tfc .trows{display:grid;grid-template-columns:auto 1fr;gap:.12em .45em;font-size:.64em;line-height:1.25}
+.tfc .trows{display:grid;grid-template-columns:auto 1fr;gap:.22em .5em;font-size:.66em;line-height:1.3;background:#fff3f6;border-radius:.55em;padding:.4em .45em}
+.tfc.tf-h .trows{background:#eef7fc}
+.tfc .trows b{display:flex;align-items:flex-start;gap:.3em}
+.tfc .trows>span{min-width:0;overflow-wrap:anywhere}
+.tfc .ticon{width:1.05em;height:1.05em;flex:none;margin-top:.12em;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .tfc .trows b{color:#9a5f86}.tfc.tf-h .trows b{color:#3c7fae}
-.tfc .tfact{margin-top:auto;font-size:.58em;line-height:1.28;background:#fff1dc;border-radius:.6em;padding:.35em .45em;overflow:hidden}
-.tfc.tf-h .tfact{background:#e6f5ff}
+.tfc .tfact{margin-top:.5em;flex-shrink:0;font-size:.62em;line-height:1.35;background:#fff1dc;border:1px solid #f2d5a4;border-radius:.6em;padding:.45em .55em}
+.tfc.tf-h .tfact{background:#e6f5ff;border-color:#b7dbef}
 .tfc .tfact b{display:block;font-size:1.05em;margin-bottom:.1em}
 .tfc .tft{display:flex;justify-content:space-between;font-size:.52em;font-weight:900;margin-top:.25em;color:#8a7aa5}
 .card.tfc.k-KS{background:linear-gradient(160deg,#fff,#d6dde8 35%,#ffb6c9)}
@@ -272,10 +276,11 @@ body.m-tf .danger{background:rgba(255,255,255,.7);color:#c0394f;border-color:#f0
 .tfc.full .tart{position:absolute;inset:0;margin:0;border:none;border-radius:.6em;aspect-ratio:auto;z-index:0}
 .tfc.full .thd,.tfc.full .trows,.tfc.full .tfact,.tfc.full .tft{position:relative;z-index:1}
 .tfc.full .thd{background:rgba(255,255,255,.82);border-radius:.5em;padding:.15em .4em}
-.tfc.full .trows{margin-top:auto;background:rgba(255,253,248,.86);border-radius:.5em .5em 0 0;padding:.3em .45em .15em}
-.tfc.full .tfact{margin-top:0;border-radius:0;background:rgba(255,241,220,.9)}
+.tfc.full .tfact{margin-top:auto;border-radius:.6em;background:rgba(255,241,220,.95)}
 .tfc.full.tf-h .tfact{background:rgba(230,245,255,.9)}
 .tfc.full .tft{margin-top:0;background:rgba(255,253,248,.86);border-radius:0 0 .5em .5em;padding:.15em .45em .2em}
+#zoomInfo .youngfacts{display:grid;grid-template-columns:auto 1fr;gap:.4em .8em;margin:.6em 0}
+#zoomInfo .youngfacts dt{font-weight:700}#zoomInfo .youngfacts dd{margin:0}
 .card.tfc.grayed{filter:grayscale(1) brightness(.92) opacity(.75)}
 /* Kartenrückseite Tierfreunde */
 .cback.tfb{border:calc(var(--cw)*.04) solid #fff;background:linear-gradient(160deg,#fff3dc,#ffd0dc 60%,#ffb6c9);box-shadow:0 .4em 1.2em rgba(0,0,0,.35)}
@@ -563,70 +568,70 @@ const sfx = {
    ========================================================= */
 const TF_SETS = {
   pferde: {name:"Pferdefreunde", icon:"🐴", main:24, sizeLbl:"Stockmaß", young:"Fohlen", cls:"tf-p", cards:[
-    ["Haflinger","Italien und Österreich (Tirol)","ca. 150 cm","ca. 360–590 kg","gutmütig, lernwillig, ausgeglichen","Fuchs mit heller Mähne","Der Haflinger-Hengst Folie wurde 1874 geboren und steht am Anfang der Haflinger-Zucht."],
-    ["Shetlandpony","Großbritannien (Shetlandinseln, Schottland)","bis 107 cm","ca. 135–270 kg","robust, lebhaft, ausdauernd","viele Farben, keine Tigerschecken","Shetlandponys bekommen im Winter ein dichtes, doppellagiges Fell, das sie vor Regen schützt."],
-    ["Hannoveraner","Deutschland (Niedersachsen)","ca. 168 cm","ca. 545–635 kg","leistungsbereit, umgänglich, rittig","u.a. Braun, Rappe, Fuchs, Schimmel","Hannoveraner werden für Dressur, Springen und Vielseitigkeit gezüchtet; auch Fahrsport gehört zum Zuchtziel."],
-    ["Trakehner","Ostpreußen (historisches Zuchtgebiet)","ca. 160–170 cm","ca. 545–680 kg","aufmerksam, leistungsbereit, umgänglich","alle Farben","Die Geschichte der Trakehner führt zum Gestüt Trakehnen, das 1732 gegründet wurde."],
-    ["Islandpferd","Island","ca. 125–145 cm","ca. 330–380 kg","freundlich, lernwillig, ausdauernd","viele Farben","Islandpferde beherrschen neben Schritt, Trab und Galopp auch Tölt; manche zeigen zusätzlich den Rennpass."],
-    ["Fjordpferd","Norwegen","ca. 135–150 cm","ca. 545–635 kg","kooperativ, zuverlässig, ruhig","Falbfarben mit Wildzeichnung","Die Stehmähne des Fjordpferdes wird traditionell bogenförmig geschnitten und betont so den Hals."],
-    ["Welsh Pony","Großbritannien (Wales)","bis 137,2 cm (Sektion B)","ca. 205–340 kg","robust, lebhaft, bewegungsfreudig","viele Farben, keine Schecken","Zur Welsh-Familie gehören die Sektionen A, B, C und D. Diese Karte beschreibt das Welsh Pony der Sektion B."],
-    ["Tinker","Irland und Großbritannien","unter 170 cm (Irish Cob)","ca. 650 kg","umgänglich, willig, freundlich","viele Farben, oft Schecken","Irish Cobs haben oft viel Haar an den unteren Beinen. Dieses lange Haar nennt man Behang."],
-    ["Quarter Horse","USA","ca. 150–163 cm","ca. 500–600 kg","vielseitig, lernwillig, ausgeglichen","viele Farben, z.B. Fuchs, Braun, Rappe","Quarter Horses sind vielseitig: Sie werden für Freizeit-, Turnier- und Rennsport gezüchtet."],
-    ["Noriker","Österreich","ca. 158–163 cm","ca. 800 kg","trittsicher, ausgeglichen, robust","u.a. Rappe, Braun, Fuchs, Tigerschecke","Der Name Noriker erinnert an Noricum, eine frühere römische Provinz im Alpenraum."],
-    ["Connemara-Pony","Irland (Connemara)","128–148 cm","ca. 365–455 kg","umgänglich, robust, trittsicher","viele Farben, häufig Schimmel","Das Zuchtziel der Connemara-Ponys verbindet einen guten Charakter mit Robustheit, Trittsicherheit und sportlicher Beweglichkeit."],
-    ["Englisches Vollblut","Großbritannien (England)","ca. 152–173 cm","ca. 455–590 kg","temperamentvoll, sportlich, sensibel","u.a. Braun, Fuchs, Rappe, Schimmel","Die Abstammung des Englischen Vollbluts führt auf drei Stammhengste zurück: Darley Arabian, Godolphin Arabian und Byerley Turk."],
-    ["Friese","Niederlande (Friesland)","ca. 160 cm","ca. 600 kg","umgänglich, bewegungsfreudig, vielseitig","schwarz als Zuchtziel","Zum typischen Friesen gehören schwarzes Fell, eine üppige Mähne, ein voller Schweif und Behang an den Beinen."],
-    ["Araber","Naher Osten (u.a. Arabische Halbinsel)","ca. 147–157 cm","ca. 365–455 kg","ausdauernd, aufmerksam, sensibel","Braun, Rappe, Fuchs, Schimmel","Die Haut vieler Araber ist unter dem Fell dunkel; unter weißen Abzeichen kann sie dagegen rosa sein."],
-    ["Lipizzaner","Slowenien (Lipica)","ca. 150–160 cm","ca. 410–545 kg","gelehrig, ausdrucksstark, vielseitig","meist Schimmel, auch dunkle Pferde","Viele Lipizzaner werden dunkel geboren. Als Schimmel bekommen sie mit dem Älterwerden immer mehr helle Haare."],
-    ["Appaloosa","USA (Palouse-Region)","ca. 147–163 cm","ca. 430–570 kg","vielseitig, willig, sportlich","viele Grundfarben, oft getupft","Appaloosas haben häufig gestreifte Hufe, gesprenkelte Haut und sichtbares Weiß um die Iris. Nicht jeder zeigt alle Merkmale."],
-    ["Andalusier","Spanien (Andalusien)","ca. 157 cm","ca. 410–500 kg","gelehrig, ausdrucksstark, beweglich","häufig Schimmel oder Braun","Pura Raza Española, kurz PRE, ist die genaue Bezeichnung der spanischen Rasse in ihrem offiziellen Zuchtbuch."],
-    ["Shire Horse","Großbritannien (England)","ca. 183 cm","ca. 900 kg","geduldig, kräftig, umgänglich","u.a. Rappe, Braun, Schimmel","Shire Horses wurden als kräftige Zugpferde gezüchtet. Ihre Stärke verbindet sich im Zuchtziel mit Geduld und Gelassenheit."],
-    ["Clydesdale","Großbritannien (Schottland)","ca. 173–183 cm","ca. 680–1.000 kg","kräftig, aufmerksam, arbeitswillig","u.a. Braun, Fuchs, Rappe","Clydesdales wurden für die Arbeit an den Ufern des Flusses Clyde in Schottland gezüchtet."],
-    ["Knabstrupper","Dänemark","ca. 152–163 cm (Reitpferd)","ca. 500 kg","vielseitig, bewegungsfreudig, kooperativ","oft Tigerschecken, auch andere Muster","Knabstrupper werden sowohl als Reitpferde als auch als Ponys gezüchtet. Ihre auffälligen Flecken sind ein bekanntes Rassemerkmal."],
-    ["Achal-Tekkiner","Turkmenistan","ca. 150–163 cm","ca. 430–500 kg (Hengste)","ausdauernd, beweglich, aufmerksam","viele Farben, oft mit Metallglanz","Ein metallisch wirkender Fellglanz ist ein erwünschtes Merkmal im Zuchtstandard der Achal-Tekkiner."],
-    ["Falabella","Argentinien","meist ca. 69–86 cm","ca. 70–80 kg","individuell verschieden","viele Farben und Scheckmuster","Bei der Falabella Miniature Horse Association können auch größere Falabellas registriert werden. Ihre Abstammung ist entscheidend."],
-    ["Dülmener Wildpferd","Deutschland (Merfelder Bruch, Westfalen)","ca. 135 cm","ca. 320–365 kg","robust, ausgeglichen, ausdauernd","mausgrau, gelbfalb oder braun","Typisch für die Dülmener sind ein dunkler Rückenstreifen, schwarze Ohrränder und angedeutete Zebrastreifen an den Beinen."],
-    ["Camargue-Pferd","Frankreich (Camargue)","135–150 cm","300–550 kg","ruhig, lebhaft, beweglich","Schimmel","Camargue-Fohlen werden mit dunklerem Fell geboren. Als erwachsene Schimmel können sie sehr hell aussehen."]
+    ["Haflinger","Italien und Österreich (Tirol)","ca. 150 cm","ca. 360–590 kg","freundlich, lernt gern, gelassen","Fuchs mit heller Mähne","Der Haflinger-Hengst Folie wurde 1874 geboren und steht am Anfang der Haflinger-Zucht."],
+    ["Shetlandpony","Großbritannien (Shetlandinseln, Schottland)","bis 107 cm","ca. 135–270 kg","hält viel aus, aktiv, hält lange durch","viele Farben, keine Tigerschecken","Shetlandponys bekommen im Winter ein dichtes, doppellagiges Fell, das sie vor Regen schützt."],
+    ["Hannoveraner","Deutschland (Niedersachsen)","ca. 168 cm","ca. 545–635 kg","macht gern mit, freundlich, gut zu reiten","u.a. Braun, Rappe, Fuchs, Schimmel","Hannoveraner werden für Pferdesport gezüchtet: zum Beispiel zum Springen, für Übungen beim Reiten und zum Ziehen von Kutschen."],
+    ["Trakehner","Ostpreußen (historisches Zuchtgebiet)","ca. 160–170 cm","ca. 545–680 kg","aufmerksam, macht gern mit, freundlich","alle Farben","Die Trakehner-Zucht begann auf dem Pferdehof Trakehnen. Er wurde 1732 gegründet."],
+    ["Islandpferd","Island","ca. 125–145 cm","ca. 330–380 kg","freundlich, lernt gern, hält lange durch","viele Farben","Islandpferde können eine besondere Gangart: den Tölt. Manche können außerdem Rennpass. Das sind andere Schritte als Schritt, Trab und Galopp."],
+    ["Fjordpferd","Norwegen","ca. 135–150 cm","ca. 545–635 kg","macht gern mit, verlässlich, ruhig","Falbfarben mit Wildzeichnung","Die kurze Mähne des Fjordpferdes steht nach oben. Oft wird sie in einem Bogen geschnitten."],
+    ["Welsh Pony","Großbritannien (Wales)","bis 137,2 cm (Sektion B)","ca. 205–340 kg","hält viel aus, aktiv, bewegt sich gern","viele Farben, keine Schecken","Welsh-Ponys und Welsh-Cobs werden in vier Gruppen eingeteilt: A, B, C und D. Auf dieser Karte siehst du ein Pony der Gruppe B."],
+    ["Tinker","Irland und Großbritannien","unter 170 cm (Irish Cob)","ca. 650 kg","freundlich, macht gern mit","viele Farben, oft Schecken","Irish Cobs haben oft viel Haar an den unteren Beinen. Dieses lange Haar nennt man Behang."],
+    ["Quarter Horse","USA","ca. 150–163 cm","ca. 500–600 kg","kann vieles, lernt gern, gelassen","viele Farben, z.B. Fuchs, Braun, Rappe","Quarter Horses können vieles: Sie werden zum Reiten in der Freizeit, für Wettbewerbe und für Pferderennen gezüchtet."],
+    ["Noriker","Österreich","ca. 158–163 cm","ca. 800 kg","geht sicher auf unebenem Boden, gelassen, hält viel aus","u.a. Rappe, Braun, Fuchs, Tigerschecke","Der Name Noriker kommt von Noricum. So hieß früher ein Gebiet der Römer in den Alpen."],
+    ["Connemara-Pony","Irland (Connemara)","128–148 cm","ca. 365–455 kg","freundlich, hält viel aus, geht sicher auf unebenem Boden","viele Farben, häufig Schimmel","Bei der Zucht der Connemara-Ponys sind ein freundliches Wesen und sichere Schritte auf unebenem Boden wichtig."],
+    ["Englisches Vollblut","Großbritannien (England)","ca. 152–173 cm","ca. 455–590 kg","voller Energie, sportlich, reagiert empfindlich","u.a. Braun, Fuchs, Rappe, Schimmel","Drei Hengste stehen am Anfang der Vollblut-Zucht: Darley Arabian, Godolphin Arabian und Byerley Turk."],
+    ["Friese","Niederlande (Friesland)","ca. 160 cm","ca. 600 kg","freundlich, bewegt sich gern, kann vieles","schwarz als Zuchtziel","Friesen haben meist schwarzes Fell, eine lange Mähne und einen vollen Schweif. Lange Haare an den Beinen nennt man Behang."],
+    ["Araber","Naher Osten (u.a. Arabische Halbinsel)","ca. 147–157 cm","ca. 365–455 kg","hält lange durch, aufmerksam, reagiert empfindlich","Braun, Rappe, Fuchs, Schimmel","Unter dem Fell haben viele Araber dunkle Haut. Unter weißen Fellstellen kann ihre Haut rosa sein."],
+    ["Lipizzaner","Slowenien (Lipica)","ca. 150–160 cm","ca. 410–545 kg","lernt schnell, bewegt sich schwungvoll, kann vieles","meist Schimmel, auch dunkle Pferde","Viele Lipizzaner werden dunkel geboren. Als Schimmel bekommen sie mit dem Älterwerden immer mehr helle Haare."],
+    ["Appaloosa","USA (Palouse-Region)","ca. 147–163 cm","ca. 430–570 kg","kann vieles, macht gern mit, sportlich","viele Grundfarben, oft getupft","Viele Appaloosas haben gestreifte Hufe und kleine Flecken auf der Haut. Oft sieht man Weiß rund um den farbigen Teil des Auges."],
+    ["Andalusier","Spanien (Andalusien)","ca. 157 cm","ca. 410–500 kg","lernt schnell, bewegt sich schwungvoll, flink","häufig Schimmel oder Braun","Die spanische Rasse heißt offiziell Pura Raza Española. Die Abkürzung dafür ist PRE."],
+    ["Shire Horse","Großbritannien (England)","ca. 183 cm","ca. 900 kg","geduldig, kräftig, freundlich","u.a. Rappe, Braun, Schimmel","Shire Horses wurden zum Ziehen schwerer Lasten gezüchtet. Dabei war auch ein geduldiges, ruhiges Wesen wichtig."],
+    ["Clydesdale","Großbritannien (Schottland)","ca. 173–183 cm","ca. 680–1.000 kg","kräftig, aufmerksam, macht gern mit","u.a. Braun, Fuchs, Rappe","Clydesdales wurden für die Arbeit an den Ufern des Flusses Clyde in Schottland gezüchtet."],
+    ["Knabstrupper","Dänemark","ca. 152–163 cm (Reitpferd)","ca. 500 kg","kann vieles, bewegt sich gern, macht gern mit","oft Tigerschecken, auch andere Muster","Knabstrupper gibt es als große Reitpferde und als kleinere Ponys. Viele haben auffällige Flecken auf dem Fell."],
+    ["Achal-Tekkiner","Turkmenistan","ca. 150–163 cm","ca. 430–500 kg (Hengste)","hält lange durch, flink, aufmerksam","viele Farben, oft mit Metallglanz","Das Fell mancher Achal-Tekkiner schimmert wie Metall. Dieser Glanz ist bei der Zucht erwünscht."],
+    ["Falabella","Argentinien","meist ca. 69–86 cm","ca. 70–80 kg","jedes Tier hat sein eigenes Wesen","viele Farben und Scheckmuster","Ein Falabella muss nicht winzig sein. Beim amerikanischen Zuchtverein zählt vor allem, dass seine Vorfahren Falabellas sind."],
+    ["Dülmener Wildpferd","Deutschland (Merfelder Bruch, Westfalen)","ca. 135 cm","ca. 320–365 kg","hält viel aus, gelassen, hält lange durch","mausgrau, gelbfalb oder braun","Dülmener haben oft einen dunklen Streifen auf dem Rücken und schwarze Ohrränder. An den Beinen können feine Zebrastreifen zu sehen sein."],
+    ["Camargue-Pferd","Frankreich (Camargue)","135–150 cm","300–550 kg","ruhig, aktiv, flink","Schimmel","Camargue-Fohlen werden mit dunklerem Fell geboren. Als erwachsene Schimmel können sie sehr hell aussehen."]
   ], youngs:[
-    [0,"Haflinger werden als Füchse mit heller Mähne und hellem Schweif gezüchtet. Die helle Mähne gehört zum Zuchtziel."],
-    [1,"Das erwachsene Shetlandpony darf im britischen Zuchtbuch höchstens 107 cm groß sein. Es gibt auch deutlich kleinere Shettys."],
-    [12,"Schwarzes Fell und viel Mähnen- und Schweifhaar gehören zum Zuchtziel der Friesen. Auch die Haare an den unteren Beinen gehören zum Rassetyp."],
-    [13,"Araber gibt es als Braune, Rappen, Füchse und Schimmel. Diese vier Grundfarben gehören zur Rasse."],
-    [14,"Viele Lipizzaner-Fohlen haben dunkles Fell. Wenn sie Schimmel sind, hellt ihr Fell mit dem Älterwerden auf."],
-    [4,"Islandpferde sind für Tölt bekannt. Manche beherrschen außerdem den Rennpass; nicht jedes Pferd zeigt alle fünf Gangarten."]
+    [0,"Das rotbraune Fell des Haflingers heißt Fuchs; dazu gehört eine helle Mähne."],
+    [1,"Viele Shetlandponys bleiben kleiner als die erlaubten 107 cm."],
+    [12,"Typisch für Friesen sind schwarzes Fell und lange Haare an Mähne, Schweif und Beinen."],
+    [13,"Die vier Grundfarben der Araber heißen Braun, Rappe, Fuchs und Schimmel."],
+    [14,"Viele Lipizzaner-Fohlen sind dunkel und bekommen als Schimmel später helles Fell."],
+    [4,"Tölt ist eine besondere Gangart der Islandpferde; manche können auch Rennpass."]
   ]},
   hunde: {name:"Hundefreunde", icon:"🐶", main:24, sizeLbl:"Schulterhöhe", young:"Welpe", cls:"tf-h", cards:[
-    ["Labrador Retriever","Großbritannien; Vorfahren aus Kanada","54–57 cm","ca. 25–36 kg","freundlich, lernwillig, aktiv","schwarz, gelb, schokoladenbraun","Der Labrador wurde in Großbritannien weiterentwickelt. Seine Vorfahren aus Neufundland halfen Fischern im Wasser."],
-    ["Golden Retriever","Großbritannien (Schottland)","51–61 cm","ca. 25–34 kg","freundlich, lernwillig, selbstsicher","gold oder creme","Golden Retriever haben eine dichte, wasserabweisende Unterwolle unter ihrem längeren Deckhaar."],
-    ["Deutscher Schäferhund","Deutschland","55–65 cm","22–40 kg","aufmerksam, ausgeglichen, arbeitswillig","u.a. schwarz, grau, schwarz mit Braun","Die planmäßige Zucht des Deutschen Schäferhunds begann 1899. Er wurde aus deutschen Hütehunden entwickelt."],
-    ["Dackel","Deutschland","ca. 20–23 cm (Normalgröße)","ca. 7–14 kg","mutig, ausdauernd, aufmerksam","u.a. rot, schwarz-loh, braun-loh","Beim Dackel unterscheidet der FCI-Standard drei Größenklassen nach dem Brustumfang, nicht nach der Schulterhöhe."],
-    ["Beagle","Großbritannien (England)","33–40 cm","ca. 10–18 kg","fröhlich, ausdauernd, aufmerksam","u.a. dreifarbig, rot-weiß, schwarz-weiß","Beagles sind Laufhunde: Sie wurden dafür gezüchtet, einer Geruchsspur zu folgen."],
-    ["Mops","China","ca. 25–33 cm","6,3–8,1 kg","fröhlich, ausgeglichen, lebhaft","silber, apricot, falb oder schwarz","Der Mops trägt seine Rute eingerollt über der Hüfte. Eine doppelte Ringelung gilt im Rassestandard als erwünscht."],
-    ["Französische Bulldogge","Frankreich","24–35 cm","8–14 kg","gesellig, lebhaft, verspielt","falb oder gestromt, auch mit Weiß","Französische Bulldoggen haben aufrechte Ohren mit einer breiten Basis und einer abgerundeten Spitze."],
-    ["Jack Russell Terrier","Großbritannien (England); Entwicklung: Australien","25–30 cm","ca. 5–6 kg","lebhaft, mutig, aufmerksam","überwiegend weiß mit schwarzen/braunen Flecken","Jack Russell Terrier und Parson Russell Terrier sind verwandt. Der Jack Russell ist der kleinere, etwas länger gebaute Typ."],
-    ["Pudel","Frankreich","ca. 24–60 cm (vier Größen)","ca. 2–32 kg (vier Größen)","lernfähig, treu, aufmerksam","viele Farben, auch mehrfarbig","Der FCI-Standard unterscheidet vier Pudelgrößen: Großpudel, Kleinpudel, Zwergpudel und Toypudel."],
-    ["Chihuahua","Mexiko","ca. 13–20 cm","1–3 kg","lebhaft, aufmerksam, mutig","viele Farben, kein Merle laut FCI","Der Chihuahua ist nach dem mexikanischen Bundesstaat Chihuahua benannt. Es gibt kurzhaarige und langhaarige Chihuahuas."],
-    ["Yorkshire Terrier","Großbritannien (England)","ca. 18–20 cm","bis 3,2 kg","lebhaft, aufmerksam, mutig","dunkles Stahlblau und goldbraun","Yorkshire Terrier haben langes, gerades und seidiges Haar. Ihre kleinen Ohren sind V-förmig und stehen aufrecht."],
-    ["Boxer","Deutschland","53–63 cm","ca. 23–36 kg","lebhaft, treu, selbstsicher","gelb oder gestromt, oft mit Weiß","Typisch für Boxer ist eine schwarze Gesichtsmaske. Gestromte Boxer haben dunkle Streifen im Fell."],
-    ["Border Collie","Großbritannien","Rüde ideal 53 cm; Hündin etwas kleiner","ca. 14–25 kg","aufmerksam, lernwillig, arbeitsfreudig","viele Farben, Weiß nicht überwiegend","Border Collies gibt es mit mäßig langem und mit kurzem Fell. Beide Varianten haben eine dichte Unterwolle."],
-    ["Australian Shepherd","USA","46–58 cm","ca. 18–30 kg","lernwillig, treu, arbeitsfreudig","schwarz, rot, blue-merle, red-merle","Trotz seines Namens wurde der Australian Shepherd als heutige Rasse in den USA entwickelt."],
-    ["Berner Sennenhund","Schweiz (Region Bern)","58–70 cm","ca. 32–52 kg","aufmerksam, ausgeglichen, umgänglich","schwarz, weiß und rostbraun","Berner Sennenhunde wurden auf Bauernhöfen auch als Wach-, Zug- und Treibhunde eingesetzt."],
-    ["Dalmatiner","Kroatien (Dalmatien)","54–62 cm","ca. 20–32 kg","freundlich, ausdauernd, lebhaft","weiß mit schwarzen oder braunen Tupfen","Dalmatiner wurden auch als Kutschenbegleiter bekannt. Ihre Tupfen können schwarz oder braun sein."],
-    ["Siberian Husky","USA; Vorfahren aus Russland (Sibirien)","50,5–60 cm","15,5–28 kg","freundlich, aufmerksam, lebhaft","viele Farben und Zeichnungen","Siberian Huskys können braune oder blaue Augen haben. Auch zwei verschiedenfarbige Augen sind möglich."],
-    ["Welsh Corgi Pembroke","Großbritannien (Wales)","ca. 25–30 cm","9–12 kg","aufmerksam, lebhaft, umgänglich","rot, zobel, falb, schwarz-loh, oft mit Weiß","Welsh Corgi Pembrokes haben kurze Beine und einen fuchsähnlichen Kopf mit aufrechten Ohren."],
-    ["Bernhardiner","Schweiz (Alpen)","65–90 cm","ca. 54–82 kg","ruhig, freundlich, aufmerksam","weiß mit rotbraunen Flächen","Bernhardiner wurden am Hospiz auf dem Großen Sankt Bernhard gehalten und sind als Begleiter bei Bergrettungen bekannt."],
-    ["Cavalier King Charles Spaniel","Großbritannien","ca. 30–33 cm","5,4–8 kg","freundlich, lebhaft, anhänglich","schwarz-loh, rubin, Blenheim, dreifarbig","Blenheim heißt beim Cavalier eine Fellzeichnung mit kastanienbraunen Flecken auf perlweißem Grund."],
-    ["Shiba Inu","Japan","35–41 cm (mit Toleranz)","ca. 8–10 kg","aufmerksam, treu, selbstsicher","rot, schwarz-loh oder sesam","Die hellen Stellen an Wangen, Brust, Bauch und Beininnenseiten heißen beim Shiba Urajiro."],
-    ["Samojede","Russland (Norden und Sibirien)","50–60 cm (mit Toleranz)","ca. 16–30 kg","freundlich, offen, lebhaft","weiß, creme oder weiß mit Biskuit","Das sogenannte Samojeden-Lächeln entsteht aus der Augenform und den leicht nach oben gezogenen Mundwinkeln."],
-    ["Irischer Wolfshund","Irland","ca. 81–89 cm","ca. 52–82 kg","umgänglich, ruhig, aufmerksam","u.a. grau, gestromt, rot, schwarz, weiß","Irische Wolfshunde haben raues Haar. Über den Augen und am Bart ist es besonders drahtig."],
-    ["Neufundländer","Kanada (Neufundland)","ca. 66–71 cm","ca. 54–68 kg","sanft, umgänglich, ruhig","schwarz, weiß-schwarz oder braun","Neufundländer haben ein wasserabweisendes Doppelfell mit weicher, dichter Unterwolle."]
+    ["Labrador Retriever","Großbritannien; Vorfahren aus Kanada","54–57 cm","ca. 25–36 kg","freundlich, lernt gern, aktiv","schwarz, gelb, schokoladenbraun","Der Labrador wurde in Großbritannien weiterentwickelt. Seine Vorfahren aus Neufundland halfen Fischern im Wasser."],
+    ["Golden Retriever","Großbritannien (Schottland)","51–61 cm","ca. 25–34 kg","freundlich, lernt gern, selbstsicher","gold oder creme","Golden Retriever haben zwei Fellschichten. Die dichte Schicht unter den längeren Haaren hält Wasser ab."],
+    ["Deutscher Schäferhund","Deutschland","55–65 cm","22–40 kg","aufmerksam, gelassen, macht gern mit","schwarz, grau, auch schwarz-braun","Seit 1899 werden Deutsche Schäferhunde gezielt gezüchtet. Ihre Vorfahren halfen Menschen beim Hüten von Tieren."],
+    ["Dackel","Deutschland","ca. 20–23 cm (Normalgröße)","ca. 7–14 kg","mutig, hält lange durch, aufmerksam","rotbraun, schwarz-braun, braun","Dackel gibt es in Normal-, Zwerg- und Kaninchengröße. In Deutschland misst man dafür um die Brust herum, nicht die Höhe."],
+    ["Beagle","Großbritannien (England)","33–40 cm","ca. 10–18 kg","fröhlich, hält lange durch, aufmerksam","u.a. dreifarbig, rot-weiß, schwarz-weiß","Beagles sind Laufhunde: Sie wurden dafür gezüchtet, einer Geruchsspur zu folgen."],
+    ["Mops","China","ca. 25–33 cm","6,3–8,1 kg","fröhlich, gelassen, aktiv","silbergrau, hellbraun oder schwarz","Der Mops hat einen geringelten Schwanz. Wenn er sich zweimal einrollt, ist das bei der Zucht besonders erwünscht."],
+    ["Französische Bulldogge","Frankreich","24–35 cm","8–14 kg","gern mit anderen zusammen, aktiv, verspielt","hellbraun oder gestreift, auch mit Weiß","Französische Bulldoggen haben aufrechte Ohren. Sie sind unten breit und oben abgerundet."],
+    ["Jack Russell Terrier","Großbritannien (England); Entwicklung: Australien","25–30 cm","ca. 5–6 kg","aktiv, mutig, aufmerksam","überwiegend weiß mit schwarzen/braunen Flecken","Jack Russell Terrier und Parson Russell Terrier sind verwandt. Der Jack Russell ist der kleinere, etwas länger gebaute Typ."],
+    ["Pudel","Frankreich","ca. 24–60 cm (vier Größen)","ca. 2–32 kg (vier Größen)","lernt schnell, treu, aufmerksam","viele Farben, auch mehrfarbig","Pudel gibt es in vier Größen: Großpudel, Kleinpudel, Zwergpudel und Toypudel. Der Toypudel ist der kleinste."],
+    ["Chihuahua","Mexiko","ca. 13–20 cm","1–3 kg","aktiv, aufmerksam, mutig","viele Farben","Der Chihuahua ist nach dem mexikanischen Bundesstaat Chihuahua benannt. Es gibt kurzhaarige und langhaarige Chihuahuas."],
+    ["Yorkshire Terrier","Großbritannien (England)","ca. 18–20 cm","bis 3,2 kg","aktiv, aufmerksam, mutig","dunkelgrau mit blauem Schimmer, goldbraun","Yorkshire Terrier haben langes, glattes und seidiges Haar. Ihre kleinen Ohren stehen aufrecht und sehen aus wie ein V."],
+    ["Boxer","Deutschland","53–63 cm","ca. 23–36 kg","aktiv, treu, selbstsicher","hellbraun oder gestreift, oft mit Weiß","Viele Boxer haben dunkles Fell im Gesicht. Gestromt bedeutet: Im Fell sind dunkle Streifen zu sehen."],
+    ["Border Collie","Großbritannien","Rüde ideal 53 cm; Hündin etwas kleiner","ca. 14–25 kg","aufmerksam, lernt gern, macht gern mit","viele Farben, meist nicht überwiegend weiß","Border Collies gibt es mit kürzerem und längerem Fell. Beide haben darunter eine dichte zweite Fellschicht."],
+    ["Australian Shepherd","USA","46–58 cm","ca. 18–30 kg","lernt gern, treu, macht gern mit","schwarz, rotbraun, grau oder braun gefleckt","Trotz seines Namens wurde der Australian Shepherd als heutige Rasse in den USA entwickelt."],
+    ["Berner Sennenhund","Schweiz (Region Bern)","58–70 cm","ca. 32–52 kg","aufmerksam, gelassen, freundlich","schwarz, weiß und rostbraun","Berner Sennenhunde halfen auf Bauernhöfen: Sie bewachten den Hof, zogen Lasten und trieben Tiere zusammen."],
+    ["Dalmatiner","Kroatien (Dalmatien)","54–62 cm","ca. 20–32 kg","freundlich, hält lange durch, aktiv","weiß mit schwarzen oder braunen Tupfen","Dalmatiner wurden auch als Kutschenbegleiter bekannt. Ihre Tupfen können schwarz oder braun sein."],
+    ["Siberian Husky","USA; Vorfahren aus Russland (Sibirien)","50,5–60 cm","15,5–28 kg","freundlich, aufmerksam, aktiv","viele Farben und Zeichnungen","Siberian Huskys können braune oder blaue Augen haben. Auch zwei verschiedenfarbige Augen sind möglich."],
+    ["Welsh Corgi Pembroke","Großbritannien (Wales)","ca. 25–30 cm","9–12 kg","aufmerksam, aktiv, freundlich","rotbraun, hellbraun, schwarz-braun, oft mit Weiß","Welsh Corgi Pembrokes haben kurze Beine und einen fuchsähnlichen Kopf mit aufrechten Ohren."],
+    ["Bernhardiner","Schweiz (Alpen)","65–90 cm","ca. 54–82 kg","ruhig, freundlich, aufmerksam","weiß mit rotbraunen Flächen","Bernhardiner lebten bei einer Herberge auf dem Großen Sankt Bernhard. Sie wurden als Helfer bei Bergrettungen bekannt."],
+    ["Cavalier King Charles Spaniel","Großbritannien","ca. 30–33 cm","5,4–8 kg","freundlich, aktiv, anhänglich","schwarz-braun, rotbraun, rotbraun-weiß, dreifarbig","Blenheim ist der Name einer Fellzeichnung: rotbraune Flecken auf weißem Fell."],
+    ["Shiba Inu","Japan","35–41 cm (mit Toleranz)","ca. 8–10 kg","aufmerksam, treu, selbstsicher","rotbraun, schwarz-braun, auch dunkel gesprenkelt","Die hellen Fellstellen an Wangen, Brust, Bauch und der Innenseite der Beine heißen beim Shiba Urajiro."],
+    ["Samojede","Russland (Norden und Sibirien)","50–60 cm (mit Toleranz)","ca. 16–30 kg","freundlich, offen, aktiv","weiß, creme, auch hellbeige Stellen","Samojeden sehen oft aus, als würden sie lächeln. Das liegt an ihren Augen und den leicht hochgezogenen Mundwinkeln."],
+    ["Irischer Wolfshund","Irland","ca. 81–89 cm","ca. 52–82 kg","freundlich, ruhig, aufmerksam","grau, gestreift, rotbraun, schwarz, weiß","Irische Wolfshunde haben raues Haar. Am Bart und über den Augen fühlt es sich besonders fest an."],
+    ["Neufundländer","Kanada (Neufundland)","ca. 66–71 cm","ca. 54–68 kg","sanft, freundlich, ruhig","schwarz, weiß-schwarz oder braun","Neufundländer haben zwei Fellschichten. Unter den äußeren Haaren liegt weiches, dichtes Fell. Ihr Fell hält Wasser ab."]
   ], youngs:[
-    [0,"Labradore gibt es in Schwarz, Gelb und Schokoladenbraun. Das sind die drei Grundfarben im Rassestandard."],
-    [1,"Golden Retriever können verschiedene Gold- und Cremetöne haben. Im Rassestandard sind beide Farbgruppen vorgesehen."],
-    [3,"Die Größenklasse eines Dackels wird nach seinem Brustumfang bestimmt. Für die Standardmessung muss er mindestens 15 Monate alt sein."],
-    [15,"Dalmatiner-Tupfen entstehen meist in den ersten Lebenswochen. Manche Welpen haben schon bei der Geburt größere Farbflächen; das sind keine späteren Tupfen."],
-    [16,"Bei Siberian Huskys sind braune, blaue und verschiedenfarbige Augen möglich. Auch eine Mischung von Blau und Braun in einem Auge kommt vor."],
-    [17,"Welsh Corgi Pembrokes haben kurze Beine und ein dichtes Unterfell. Ihre Rasse gehört zu den Hütehunden."]
+    [0,"Labradore gibt es in Schwarz, Gelb und Schokoladenbraun."],
+    [1,"Golden Retriever gibt es in verschiedenen Gold- und Cremetönen."],
+    [3,"Für die Größenklasse misst man beim Dackel um die Brust herum, wenn er mindestens 15 Monate alt ist."],
+    [15,"Die kleinen Tupfen der Dalmatiner entstehen meist in den ersten Lebenswochen."],
+    [16,"Huskys können blaue, braune oder zwei verschiedenfarbige Augen haben."],
+    [17,"Die Vorfahren der kurzbeinigen Corgis halfen Menschen beim Hüten von Tieren."]
   ]},
 };
 const TF_RAR = {KC:{name:'Gewöhnlich', sym:'●', color:'#9aa5b1'}, KS:{name:'Selten', sym:'◆', color:'#4aa3d8'},
@@ -669,10 +674,10 @@ const MILESTONES = [
 ];
 const QUIZ_TYPES = [
   {k:'img', key:'name', label:'Rasse erkennen', question:c=>'Welche Rasse ist das?'},
-  {k:'orig', key:'originQuiz', label:'Herkunft', question:c=>`Welches Herkunftsgebiet wird auf der Karte von <b>${esc(c.name)}</b> genannt?`},
-  {k:'size', key:'size', label:'Größe', question:c=>`Welche Größenangabe (${TF_SETS[c.set].sizeLbl}) steht auf der Karte von <b>${esc(c.name)}</b>?`},
-  {k:'weight', key:'weight', label:'Gewicht', question:c=>`Welche Gewichtsangabe steht auf der Karte von <b>${esc(c.name)}</b>?`},
-  {k:'chr', key:'chr', label:'Charakter', question:c=>`Welcher Charakter wird auf der Karte von <b>${esc(c.name)}</b> beschrieben?`},
+  {k:'orig', key:'originQuiz', label:'Herkunft', question:c=>`Aus welchem Land oder Gebiet kommt <b>${esc(c.name)}</b> laut der Karte?`},
+  {k:'size', key:'size', label:'Größe', question:c=>`Welche Größe steht auf der Karte von <b>${esc(c.name)}</b>?`},
+  {k:'weight', key:'weight', label:'Gewicht', question:c=>`Welches Gewicht steht auf der Karte von <b>${esc(c.name)}</b>?`},
+  {k:'chr', key:'chr', label:'Charakter', question:c=>`Welche Eigenschaften stehen auf der Karte von <b>${esc(c.name)}</b>?`},
   {k:'col', key:'col', label:'Farben', question:c=>`Welche Farben stehen auf der Karte von <b>${esc(c.name)}</b>?`}
 ];
 if (!tfSave.learning || typeof tfSave.learning !== 'object') tfSave.learning = {};
@@ -712,7 +717,7 @@ function duelWinner(a,b,field,low=false){
   if (av === null || bv === null) return null;
   return av === bv ? 'tie' : (low ? av < bv : av > bv) ? 'player' : 'computer';
 }
-const comparisonRule = 'Wir nehmen die größte eindeutig angegebene Zahl als Spielwert: 400–600 kg zählt als 600 kg. Auch ein Wert mit „ca.“ oder ein Zuchtziel ist nur eine Orientierung. Echte Tiere können davon abweichen. Gleiche Spielwerte bedeuten Gleichstand. Angaben wie „mindestens“, „unter“, „auch mehr“ und fehlende Zahlen werden nicht verglichen.';
+const comparisonRule = 'Im Duell zählt die größte Zahl auf der Karte: Bei 400–600 kg spielen wir mit 600 kg. „ca.“ heißt ungefähr. Ein echtes Tier kann leichter oder schwerer sein. Bei gleichen Zahlen gibt es einen Gleichstand. Angaben wie „mindestens“ oder „unter“ vergleichen wir nicht.';
 if (!tfSave.duels || typeof tfSave.duels !== 'object') tfSave.duels = {};
 if (!tfSave.expert || typeof tfSave.expert !== 'object') tfSave.expert = {};
 Object.keys(TF_SETS).forEach(sk => {
@@ -808,16 +813,28 @@ function tfArt(c){
     <rect width="160" height="100" fill="url(#tfph${c.id})"/><text x="80" y="58" text-anchor="middle" font-size="38">${S.icon}</text>
     <text x="80" y="86" text-anchor="middle" font-size="10" font-weight="700" fill="#8a7aa5" font-family="Segoe UI,Verdana,sans-serif">Bild folgt</text></svg>`;
 }
+function cardLabel(kind,label){
+  const shapes={origin:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c-5 5-5 13 0 18M12 3c5 5 5 13 0 18"/>',size:'<path d="M8 3h8v18H8zM8 7h4M8 11h3M8 15h4M8 19h3"/>',weight:'<circle cx="12" cy="5" r="3"/><path d="M6 8h12l3 13H3z"/>',chr:'<path d="M12 21S3 15 3 8a5 5 0 0 1 9-3 5 5 0 0 1 9 3c0 7-9 13-9 13z"/>',col:'<circle cx="8" cy="8" r="5"/><circle cx="16" cy="8" r="5"/><circle cx="12" cy="16" r="5"/>'};
+  return `<b><svg class="ticon" viewBox="0 0 24 24" aria-hidden="true">${shapes[kind]}</svg>${esc(label)}</b>`;
+}
+const nameMeasure=document.createElement('canvas').getContext('2d');
+function cardNameSize(name,badge,young){
+  nameMeasure.font='900 100px "Segoe UI"';
+  const nameWidth=nameMeasure.measureText(name).width/100;
+  nameMeasure.font='900 55px "Segoe UI"';
+  const badgeWidth=nameMeasure.measureText(badge).width/100+.605;
+  return Math.min(1,Math.floor(((young?15.2:16)-badgeWidth-.4)/nameWidth*100)/100);
+}
 function tfCardHTML(c, extra=''){
   const S = TF_SETS[c.set], R = TF_RAR[c.rar];
   const sp = c.rar==='KG' || c.rar==='KX' ? Array.from({length:5},(_, i)=>`<i class="spark" style="left:${8+((i*37)%84)}%;top:${6+((i*53)%88)}%;animation-delay:${(i*.3).toFixed(2)}s"></i>`).join('') : '';
   const adult = c.young ? ' (erwachsen)' : '';
   return `<div class="card tfc ${S.cls} k-${c.rar} ${c.young ? 'full' : ''} ${extra}" data-id="${c.id}">
     <div class="tin">
-      <div class="thd"><span class="tnm">${esc(c.name)}</span><span class="tbadge">${c.young ? S.young : R.name}</span></div>
+      <div class="thd"><span class="tnm" style="--name-size:${cardNameSize(c.name,c.young?S.young:R.name,c.young)}em">${esc(c.name)}</span><span class="tbadge">${c.young ? S.young : R.name}</span></div>
       <div class="tart">${tfArt(c)}</div>
-      <div class="trows"><b>Herkunft</b><span>${esc(c.origin)}</span><b>${S.sizeLbl}${adult}</b><span>${esc(c.size)}</span>
-        <b>Gewicht${adult}</b><span>${esc(c.weight)}</span><b>Charakter</b><span>${esc(c.chr)}</span><b>Farben</b><span>${esc(c.col)}</span></div>
+      ${c.young?'':`<div class="trows">${cardLabel('origin','Herkunft')}<span>${esc(c.origin)}</span>${cardLabel('size','Größe'+adult)}<span>${esc(c.size)}</span>
+        ${cardLabel('weight','Gewicht'+adult)}<span>${esc(c.weight)}</span>${cardLabel('chr','Charakter')}<span>${esc(c.chr)}</span>${cardLabel('col','Farben')}<span>${esc(c.col)}</span></div>`}
       <div class="tfact"><b>💡 Wusstest du schon?</b>${esc(c.fact)}</div>
       <div class="tft"><span>${pad3(c.no)}/${pad3(S.main)}</span><span style="color:${R.color}">${R.sym} ${R.name}</span></div>
     </div>${sp}
@@ -825,12 +842,14 @@ function tfCardHTML(c, extra=''){
 }
 function cardInfoHTML(c){
   const meta=TF_REVIEW.cards[c.id], sources=(meta?.sources||[]).map(id=>TF_REVIEW.sources[id]).filter(Boolean);
-  return `<details><summary>📖 Kartenangaben & Quellen</summary><p>„ca.“ bedeutet ungefähr. Die Zahlen helfen dir, Größe und Gewicht erwachsener Tiere zu vergleichen. Ein echtes Tier kann größer, kleiner, leichter oder schwerer sein. Manche Bereiche fassen männliche und weibliche Tiere zusammen.</p>
+  return `<details><summary>📖 Kartenangaben & Quellen</summary><p>„ca.“ bedeutet ungefähr. Die Größe wird vom Boden bis zur Schulter gemessen. Bei Pferden heißt das Stockmaß. Die Zahlen helfen dir, erwachsene Tiere zu vergleichen. Ein echtes Tier kann größer, kleiner, leichter oder schwerer sein. Manche Bereiche fassen männliche und weibliche Tiere zusammen.</p>
+    ${c.young?`<p><b>Wenn dein ${TF_SETS[c.set].young} groß ist:</b> Diese Angaben beschreiben die erwachsene Rasse, nicht das Jungtier auf dem Bild.</p><dl class="youngfacts"><dt>Herkunft</dt><dd>${esc(c.origin)}</dd><dt>Größe</dt><dd>${esc(c.size)}</dd><dt>Gewicht</dt><dd>${esc(c.weight)}</dd><dt>Charakter</dt><dd>${esc(c.chr)}</dd><dt>Farben</dt><dd>${esc(c.col)}</dd></dl>`:''}
     ${meta?.scope?`<p>${esc(meta.scope)}</p>`:''}
     ${c.id==='p007'?'<p>Das Welsh-Pony auf dieser Karte gehört zur Sektion B. Andere Welsh-Typen können kleiner oder größer sein.</p>':''}
     ${c.id==='p013'?'<p>Die ungefähr 600 kg sind ein Anhaltspunkt. Viele Friesen sind schwerer.</p>':''}
     ${c.id==='p019'?'<p>Auch Clydesdales mit mehr als 1.000 kg kommen vor. Der Bereich auf der Karte ist eine Orientierung.</p>':''}
     <p>Charakter beschreibt typische Eigenschaften. Jedes Tier ist anders. Die Farben auf der Karte sind Beispiele.</p>
+    ${c.set==='pferde'?'<p>Pferdefarben haben eigene Namen: Rappe bedeutet schwarz, Fuchs rotbraun. Ein Schimmel bekommt beim Älterwerden immer mehr weiße Haare. Große Fellflecken heißen Schecken, kleine Tupfen Tigerschecken.</p>':''}
     ${c.originAreas?.includes('GB')?'<p>England, Schottland und Wales gehören zu Großbritannien. Zusammen mit Nordirland bilden sie das Vereinigte Königreich.</p>':''}
     ${c.id==='h001'||c.id==='h025'?'<p>Beim Labrador unterscheidet die Karte die Zucht in Großbritannien von den Vorfahren aus Kanada.</p>':''}
     ${c.id==='h008'?'<p>Der Jack Russell stammt ursprünglich aus England und wurde in Australien weiterentwickelt.</p>':''}
@@ -985,7 +1004,7 @@ function newExpertQuestion(){
   const sk=tfCur(), all=mains(sk), kind=rnd(['fact','clue','compare']);
   let c=rnd(all.filter(c=>c.id!==lastExpertQuestion)), q, right, choices, explanation, field=null, low=false;
   if(kind==='fact'){
-    q=`Welcher Wissensfakt steht auf der Karte von <b>${esc(c.name)}</b>?`;
+    q=`Welcher Wissenssatz steht auf der Karte von <b>${esc(c.name)}</b>?`;
     right=c.fact; choices=pickChoices(c,all,'fact'); explanation=`${esc(c.name)}: ${esc(c.fact)}`;
   } else if(kind==='clue'){
     q=`Auf welcher Rassenkarte stehen genau diese beiden Angaben?<br><span class="expertclue" data-field="origin">${esc(c.origin)}</span><br><span class="expertclue" data-field="col">${esc(c.col)}</span>`;
@@ -997,7 +1016,7 @@ function newExpertQuestion(){
     for(const x of shuffle(all.slice())){ const value=cardValue(x,field); if(value!==null && !unique.some(y=>cardValue(y,field)===value))unique.push(x); }
     const options=unique.slice(0,4);
     c=options.reduce((a,b)=>(low?cardValue(a,field)<cardValue(b,field):cardValue(a,field)>cardValue(b,field))?a:b);
-    q=`Welche dieser Rassen hat den ${low?'niedrigsten':'höchsten'} eindeutig angegebenen ${field==='size'?'Größenwert':'Gewichtswert'} auf ihrer Karte?`;
+    q=`Auf welcher Karte steht die ${low?'kleinste':'größte'} Zahl für ${field==='size'?'die Größe':'das Gewicht'}?`;
     right=c.name; choices=shuffle(options.map(x=>x.name));
     explanation=`${options.map(x=>`${esc(x.name)}: ${esc(x[field])} → Spielwert ${cardValue(x,field)} ${field==='size'?'cm':'kg'}`).join('<br>')}<br><br>${comparisonRule}`;
   }
@@ -1021,14 +1040,14 @@ function renderKnowledge(){
       <p class="tradehint">Die ersten ${ECO.quizPerDay} Fragen am Tag geben bei richtiger Antwort Herzchen. Beim freiwilligen Üben sammelst du Wissen und Abzeichen ohne Herzchen.</p></details>
     <div class="quizactions"><button class="softbtn" id="qMode">${quizPractice?'Zurück zum Tagesquiz':'Ohne Herzchen üben'}</button>
       <button class="softbtn ${quizExpert?'chosen':''}" id="qExpert" ${expertUnlocked(tfCur())?'':'disabled'} aria-pressed="${quizExpert}">${expertUnlocked(tfCur())?'🎓 Expertenquiz':'🔒 Expertenquiz · Album vervollständigen'}</button></div>
-    ${quizExpert?`<p class="tradehint">Kartenfakten kombinieren, Tiere vergleichen und Wissensfakten erkennen. ${tfSave.expert[tfCur()].correct} von ${tfSave.expert[tfCur()].answered} Expertenfragen richtig. Kosmetische Ziele: 10 und 25 richtige Antworten.</p>`:''}</div>`;
+    ${quizExpert?`<p class="tradehint">Verbinde Hinweise, vergleiche Tiere und erkenne Wissenssätze. ${tfSave.expert[tfCur()].correct} von ${tfSave.expert[tfCur()].answered} Expertenfragen richtig. Neue Designs bekommst du bei: 10 und 25 richtige Antworten.</p>`:''}</div>`;
 }
 function renderQuiz(){
   const D = tfDay(), left = ECO.quizPerDay - D.quiz, host = $('#quizBox');
   if (quizDate !== D.date){ quizDate = D.date; QZ = null; quizPractice = false; quizExpert = false; }
   if (quizExpert && !expertUnlocked(tfCur())){ quizExpert=false; quizPractice=false; QZ=null; }
   tfSetChips($('#tfSetsQuiz')); renderKnowledge();
-  $('#quizInfo').textContent = quizExpert ? '🎓 Expertenquiz · kosmetische Belohnungen entdecken · keine Herzchen' : quizPractice ? '🌱 Übungsmodus · Wissen und Abzeichen sammeln · keine Herzchen' : `Heute noch ${Math.max(0,left)} von ${ECO.quizPerDay} Fragen · richtige Antwort = ${ECO.quizHearts} 💖`;
+  $('#quizInfo').textContent = quizExpert ? '🎓 Expertenquiz · neue Designs entdecken · keine Herzchen' : quizPractice ? '🌱 Übungsmodus · Wissen und Abzeichen sammeln · keine Herzchen' : `Heute noch ${Math.max(0,left)} von ${ECO.quizPerDay} Fragen · richtige Antwort = ${ECO.quizHearts} 💖`;
   if (!quizPractice && left <= 0 && !(QZ && QZ.done)){ host.innerHTML = `<div class="qend">🌟 Dein Tagesquiz ist geschafft!<p>Du kannst weiter üben und Abzeichen sammeln.</p><button class="softbtn" data-practice>Jetzt üben</button></div>`; return; }
   if (!QZ) QZ = newQuestion();
   const art = QZ.type === 'img' ? `<div class="qimg">${tfArt(QZ.card)}</div>` : '';
@@ -1109,12 +1128,12 @@ function renderDuel(){
     const last=stats.last, canPlay=canDuel(sk);
     host.innerHTML=header+`<div class="duelpanel">${last?`<h3>${last.score>last.computer?'🌟 Du hast das Duell gewonnen!':last.score===last.computer?'🤝 Ihr habt gleich viele Punkte!':'🤖 Diesmal gewinnt der Computer.'}</h3><div class="duelmeta"><span>Du: ${last.score}</span><span>Computer: ${last.computer}</span><span>Gleichstand: ${last.ties}</span></div><p>Danke fürs Spielen! Jede abgeschlossene Partie zählt für deine Duell-Abzeichen.</p>${last.legacy?'<p>Diese abgeschlossene Partie wurde mit früheren Kartenangaben gespielt.</p>':''}<details><summary>Die fünf Runden ansehen</summary>${duelLogHTML(last.results,last.legacy)}</details>`:
       '<h3>Deine Tiere spielen mit!</h3><p>Wähle jede Runde aus bis zu drei deiner gesammelten Rassenkarten. Der Computer deckt danach seine Karte auf. Fünf Runden ergeben ein Duell.</p><p>Auch kleine und leichte Tiere können gewinnen. Alle Karten bleiben in deinem Album.</p>'}
-      <p>${canPlay?'Du brauchst keine Herzchen. Mehr gesammelte Rassen geben dir mehr Auswahl.':'Sammle zuerst eine Rassenkarte mit einem eindeutigen Größen- oder Gewichtswert, dann kann dein Duell starten.'}</p><button class="bigbtn" id="duelStart" ${canPlay?'':'disabled'}>${last?'Neues Duell':'Duell starten'}</button></div>`;
+      <p>${canPlay?'Du brauchst keine Herzchen. Mehr gesammelte Rassen geben dir mehr Auswahl.':'Sammle zuerst eine Karte von einem erwachsenen Tier. Dann kann dein Duell starten.'}</p><button class="bigbtn" id="duelStart" ${canPlay?'':'disabled'}>${last?'Neues Duell':'Duell starten'}</button></div>`;
     return;
   }
   const task=match.task, last=match.results[match.results.length-1];
   host.innerHTML=header+`<div class="duelpanel"><div class="duelmeta"><span>Runde ${match.round}/5</span><span>Du ${match.score} : ${match.computer} Computer</span></div><h3 style="margin-top:16px">${task.icon} ${task.label}</h3>
-    ${match.phase==='choose'?`<p>Wähle eine Karte. Die Computerkarte bleibt bis dahin verdeckt.</p><div class="duelhand">${match.hand.map(id=>duelCardHTML(TF_BY_ID[id],task,true)).join('')}</div><small>Spielwert = höchster eindeutig angegebener Kartenwert.</small>`:
+    ${match.phase==='choose'?`<p>Wähle eine Karte. Die Computerkarte bleibt bis dahin verdeckt.</p><div class="duelhand">${match.hand.map(id=>duelCardHTML(TF_BY_ID[id],task,true)).join('')}</div><small>Spielwert = größte Zahl auf der Karte.</small>`:
       `<div class="duelversus"><div class="duelside"><small>Deine Karte</small>${duelCardHTML(TF_BY_ID[last.player],task)}</div><span>↔</span><div class="duelside"><small>Computerkarte</small>${duelCardHTML(TF_BY_ID[last.opponent],task)}</div></div>
       <p class="qres" role="status">${last.winner==='tie'?'🤝 Gleiche Spielwerte – kein Punkt in dieser Runde.':last.winner==='player'?'🌟 Ein Punkt für dich!':'🤖 Ein Punkt für den Computer. Auf zur nächsten Chance!'}</p>
       <p class="qexplain"><b>💡 ${esc(TF_BY_ID[last.player].name)}</b><br>${esc(TF_BY_ID[last.player].fact)}</p>
@@ -1597,7 +1616,7 @@ SRC = TF_SRC;
 tfPersist();
 showView('tfpacks');
 
-window.TF = {TF_LIST, tfDraw, TF_BY_ID, cardValue, duelWinner, quizChoices:pickChoices};
+window.TF = {TF_LIST, tfDraw, TF_BY_ID, cardValue, duelWinner, quizChoices:pickChoices, renderCard:tfCardHTML, renderInfo:cardInfoHTML};
 })();
 </script>
 </body>
